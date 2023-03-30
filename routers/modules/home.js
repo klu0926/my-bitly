@@ -2,8 +2,9 @@
 const Router = require('express').Router()
 
 
+// home
 Router.get('/', (req, res) => {
-  res.send('<h1>This is working!</h1>')
+  res.render('index')
 })
 
 module.exports = Router
