@@ -37,7 +37,8 @@ Router.post('/', async (req, res) => {
   const inputUrl = req.body.url
   const url = inputUrl.trim().toLowerCase()
   let errorMessage = ""
-  let shorterLink = "localhost:3000/"
+  // req.headers.origin
+  let shorterLink = req.headers.origin + "/"
 
   // check input
   if (url === "") {
