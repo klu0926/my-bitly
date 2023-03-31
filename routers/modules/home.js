@@ -11,12 +11,33 @@ Router.get('/', (req, res) => {
   res.render('index')
 })
 
+// PORTAL
+Router.get('/:url', async (req, res) => {
+  const shortUrl = req.params.url
+  console.log(shortUrl)
+
+  // check input
+  if (!shortUrl) {
+    console.log('short link error', shortUrl)
+    return res.render('error')
+  }
+
+  // check for data
+  const exist = await dataExist('shortUrl', shortUrl)
+  if (exist) {
+    res.redirect(exist.originalUrl)
+  } else {
+    console.log('can not find data with this short link')
+    res.render('error')
+  }
+})
+
 // POST
 Router.post('/', async (req, res) => {
   const inputUrl = req.body.url
   const url = inputUrl.trim().toLowerCase()
   let errorMessage = ""
-  let shorterLink = "http://localhost/"
+  let shorterLink = "localhost:3000/"
 
   // check input
   if (url === "") {
@@ -37,11 +58,6 @@ Router.post('/', async (req, res) => {
     return res.render('index', { errorMessage })
   }
 
-  // Warning user status code is out of 200-299
-  if (!response.ok) {
-    errorMessage = `Your url return status code out of 200-299, status code: ${response.status}`
-  }
-
   // check data if already exist
   const exist = await dataExist('originalUrl', url)
   // return shorter url
@@ -53,8 +69,9 @@ Router.post('/', async (req, res) => {
 
   } else {
     // create a new link, save to data
-    shorterLink += await generateLink()
-    const newData = await createData(url, shorterLink)
+    const link = await generateLink()
+    shorterLink += link
+    const newData = await createData(url, link)
 
     console.log('Create new short url to return, All done')
     return res.render('index', { url, shorterLink })

@@ -7,7 +7,7 @@ const linkStrings = {
   lowerCaseLetters: 'abcdefghijklmnopqrstuvwxyz',
   upperCaseLetters: 'abcdefghijklmnopqrstuvwxyz'.toUpperCase(),
   numbers: '1234567890',
-  symbols: '`~!@$%^&*()-_+={}[]|;:"<>,.?/',
+  // symbols: '`~!@$%^&*()-_+={}[]|;:"<>,.?/',
 }
 
 
@@ -32,7 +32,7 @@ async function generateLink() {
   }
 
   const exist = await dataExist("shortUrl", shortLink)
-  if (exist){
+  if (exist) {
     console.log('link already exist, regenerate link')
     generateLink()
   } else {
