@@ -10,11 +10,12 @@ Router.get('/', (req, res) => {
 
 // POST
 Router.post('/', async (req, res) => {
-  const url = req.body.url
+  const inputUrl = req.body.url
+  const url = inputUrl.trim().toLowerCase()
   let errorMessage = ""
 
   // check input
-  if (url.trim() === "") {
+  if (url === "") {
     errorMessage = "Please enter your url"
     return res.render('index', { errorMessage })
   }
@@ -33,9 +34,20 @@ Router.post('/', async (req, res) => {
     return res.render('index', { errorMessage })
   }
 
+  // Warning user status code is out of 200-299
+  if (!response.ok) {
+    errorMessage = `Your url return status code out of 200-299, status code: ${response.status}`
+  }
+
   // check data if already exist
-  res.render('index')
-  console.log('working!')
+  
+
+  // create shorter url
+
+
+  // return shorter url
+  res.render('index', { url, errorMessage })
+  console.log('working!', url)
 })
 
 module.exports = Router

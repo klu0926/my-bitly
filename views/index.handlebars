@@ -3,7 +3,8 @@
   <div class="row d-flex justify-content-center">
     <div class="col-sm-12 col-md-10 col-lg-6 col-xl-6">
       <div class="mb-3">
-        <input class="form-control" type="text" name="url" id="url" placeholder="http://www.google.com">
+        <input class="form-control" type="text" name="url" id="url" {{#if url}}value="{{url}}" {{/if}}
+          placeholder="http://www.google.com">
         {{#if errorMessage}}
         <span class="text-danger mt-0 mb-0">{{errorMessage}}</span>
         {{/if}}
