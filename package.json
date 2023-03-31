@@ -7,7 +7,8 @@
     "start": "node app.js",
     "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node ./models/seed/urlSeeder.js"
+    "seed": "node ./models/seed/urlSeeder.js",
+    "deleteAllData": "node ./models/seed/deleteAllData.js"
   },
   "author": "",
   "license": "ISC",

@@ -1,24 +1,27 @@
 const db = require('../../config/mongoose')
 const urlModel = require('../urlModel')
+const generateLink = require('../../tools/generateLink')
 
 const seederData = [
   {
     originalUrl: 'http://www.google.com',
-    shortUrl: 'aaaaa'
   },
   {
-    originalUrl: 'https://tw.yahoo.com/',
-    shortUrl: 'bbbbb'
+    originalUrl: 'https://tw.yahoo.com',
   },
   {
-    originalUrl: 'https://www.youtube.com/',
-    shortUrl: 'ccccc'
+    originalUrl: 'https://www.youtube.com',
   },
 ]
 
-console.log('please wait, creating seed...')
+db.once('open', async () => {
 
-db.once('open', () => {
+  // generate short url
+  await Promise.all(seederData.map(async object => {
+    object.shortUrl = await generateLink()
+  }))
+  
+  // create seed
   urlModel.create(seederData)
   console.log('seed created!')
 })

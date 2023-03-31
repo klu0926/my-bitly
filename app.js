@@ -2,6 +2,7 @@
 const express = require('express')
 const handlebars = require('express-handlebars')
 const Router = require('./routers')
+require('./config/mongoose')
 
 
 // app 

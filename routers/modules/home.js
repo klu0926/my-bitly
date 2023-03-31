@@ -1,7 +1,9 @@
 // home
 const Router = require('express').Router()
 const validUrl = require('valid-url')
-const fetchCheck = require('../../config/fetchCheck')
+const fetchCheck = require('../../tools/fetchCheck')
+const urlModel = require('../../models/urlModel')
+const dataExist = require('../../tools/dataExist')
 
 // GET
 Router.get('/', (req, res) => {
@@ -28,7 +30,6 @@ Router.post('/', async (req, res) => {
 
   // check with fetch
   const response = await fetchCheck(url)
-  console.log('response: ', response)
   if (response === false) {
     errorMessage = `Fail to connect to your url, please check if url is working correctly`
     return res.render('index', { errorMessage })
@@ -40,14 +41,19 @@ Router.post('/', async (req, res) => {
   }
 
   // check data if already exist
-  
+  console.log('trying to find:', url)
+  const exist = await dataExist(url)
+  if (exist) {
+    console.log('url already in our data')
+  } else {
+    console.log('url is not in our data')
+  }
+
 
   // create shorter url
 
-
   // return shorter url
   res.render('index', { url, errorMessage })
-  console.log('working!', url)
 })
 
 module.exports = Router
