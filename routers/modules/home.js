@@ -2,9 +2,9 @@
 const Router = require('express').Router()
 const validUrl = require('valid-url')
 const fetchCheck = require('../../tools/fetchCheck')
-const urlModel = require('../../models/urlModel')
 const dataExist = require('../../tools/dataExist')
 const generateLink = require('../../tools/generateLink')
+const createData = require('../../models/createData')
 
 // GET
 Router.get('/', (req, res) => {
@@ -46,16 +46,20 @@ Router.post('/', async (req, res) => {
   const exist = await dataExist('originalUrl', url)
   // return shorter url
   if (exist) {
+    // return data short link
     shorterLink += exist.shortUrl
+    console.log('Return exist data short url, All done')
     return res.render('index', { url, shorterLink })
+
   } else {
+    // create a new link, save to data
     shorterLink += await generateLink()
+    const newData = await createData(url, shorterLink)
+
+    console.log('Create new short url to return, All done')
     return res.render('index', { url, shorterLink })
+
   }
-
-  // create shorter url ///////////
-
-
 })
 
 module.exports = Router

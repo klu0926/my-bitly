@@ -4,20 +4,17 @@ const db = require('../config/mongoose')
 
 
 function createData(originalUrl, shortUrl) {
-
   const dataObject = { originalUrl, shortUrl }
 
   console.log('creating single data...')
 
-  db.once('open', () => {
-    urlModel.create(dataObject)
-      .then(() => {
-        console.log('data created!', dataObject)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  })
+  return urlModel.create(dataObject)
+    .then(() => {
+      return console.log('data created!', dataObject)
+    })
+    .catch(error => {
+      return console.log(error)
+    })
 }
 
-createData('https://www.w3schools.com/', 'wdioj')
+module.exports = createData
