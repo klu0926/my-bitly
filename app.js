@@ -4,8 +4,7 @@ const handlebars = require('express-handlebars')
 const Router = require('./routers')
 require('./config/mongoose')
 
-
-// app 
+// app
 const app = express()
 const port = 3000
 
@@ -20,9 +19,7 @@ app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(Router)
 
-
 // app route
-
 
 // app start
 app.listen(port, () => {

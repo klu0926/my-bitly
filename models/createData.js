@@ -1,9 +1,6 @@
 const urlModel = require('./urlModel')
-const db = require('../config/mongoose')
 
-
-
-function createData(originalUrl, shortUrl) {
+function createData (originalUrl, shortUrl) {
   const dataObject = { originalUrl, shortUrl }
 
   console.log('creating single data...')

@@ -36,15 +36,15 @@ Router.get('/:url', async (req, res) => {
 Router.post('/', async (req, res) => {
   const inputUrl = req.body.url
   const url = inputUrl.trim().toLowerCase()
-  let errorMessage = ""
+  let errorMessage = ''
 
   // get my current server URL
   let shorterLink = `${req.protocol}://${req.hostname}:${process.env.PORT}`
 
   // check input
   // 防止表單送出並提示使用者
-  if (url === "") {
-    errorMessage = "Please enter your url"
+  if (url === '') {
+    errorMessage = 'Please enter your url'
     return res.render('index', { errorMessage })
   }
 
@@ -57,7 +57,7 @@ Router.post('/', async (req, res) => {
   // check with fetch
   const response = await fetchCheck(url)
   if (response === false) {
-    errorMessage = `Fail to connect to your URL, please check if URL is working correctly`
+    errorMessage = 'Fail to connect to your URL, please check if URL is working correctly'
     return res.render('index', { errorMessage })
   }
 
@@ -69,16 +69,14 @@ Router.post('/', async (req, res) => {
     shorterLink += exist.shortUrl
     console.log('Return exist data short URL, All done')
     return res.render('index', { url, shorterLink })
-
   } else {
     // create a new link, save to data
     const link = await generateLink()
     shorterLink += link
-    const newData = await createData(url, link)
+    await createData(url, link)
 
     console.log('Create new short url to return, All done')
     return res.render('index', { url, shorterLink })
-
   }
 })
 

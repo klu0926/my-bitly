@@ -1,7 +1,6 @@
 const urlModel = require('../models/urlModel')
 
-
-function dataExist(urlType, url) {
+function dataExist (urlType, url) {
   const findObject = {}
   findObject[urlType] = url
 

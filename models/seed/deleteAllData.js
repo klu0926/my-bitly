@@ -1,7 +1,6 @@
 const db = require('../../config/mongoose')
 const urlModel = require('../urlModel')
 
-
 console.log('deleing all data wait...')
 
 db.once('open', () => {
@@ -12,5 +11,4 @@ db.once('open', () => {
     .catch(error => {
       console.log(error)
     })
-
 })
