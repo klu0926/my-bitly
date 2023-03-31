@@ -6,21 +6,23 @@
 
         {{#if shorterLink}}
         <!-- url output -->
-        <h2 class="text-center">Success! Click to copy this link:</h2>
+        <h2 class="text-center">Success! Your shorten URL:</h2>
 
-        <div class="d-flex justify-content-center mt-3">
-          <!-- copy button -->
-          <div class="position-relative w-100" style="height: 100px;">
-            <h3 id="short-url" class="text-light position-absolute top-50 start-50 translate-middle"
-              style="z-index: 100">
-              {{shorterLink}}
-            </h3>
-            <button type="button" id="copy-button" class="btn btn-success position-relative w-100 h-100 px-5">
-              <span id="copy-span" class="text-light position-absolute mt-1 fw-bold d-none"
-                style="top:40%; right:0%;transform: translate(-50%, -50%);">Copied</span>
-            </button>
-          </div>
+        <!-- copy button -->
+        <div class="my-4 border border-2 border-primary rounded w-100 d-flex justify-content-center align-items-center"
+          style="height: 70px;">
+          <a id="short-url" class="h4 text-primary text-center" target="_blank" href="http://{{shorterLink}}">
+            {{shorterLink}}
+          </a>
         </div>
+        <div class="w-100">
+          <button type="button" id="copy-button" class="btn btn-success position-relative w-100 h-100 px-5">
+            Copy
+            <span id="copy-span" class="text-light position-absolute mt-1 fw-bold d-none"
+              style="top:40%; right:0%;transform: translate(-50%, -50%);">Copied</span>
+          </button>
+        </div>
+
         <div class="mt-2">
           <a href="/">
             <button type="button" class="btn btn-secondary w-100 fw-bold px-5">

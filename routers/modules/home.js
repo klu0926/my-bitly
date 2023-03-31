@@ -54,7 +54,7 @@ Router.post('/', async (req, res) => {
   // check with fetch
   const response = await fetchCheck(url)
   if (response === false) {
-    errorMessage = `Fail to connect to your url, please check if url is working correctly`
+    errorMessage = `Fail to connect to your URL, please check if URL is working correctly`
     return res.render('index', { errorMessage })
   }
 
@@ -64,7 +64,7 @@ Router.post('/', async (req, res) => {
   if (exist) {
     // return data short link
     shorterLink += exist.shortUrl
-    console.log('Return exist data short url, All done')
+    console.log('Return exist data short URL, All done')
     return res.render('index', { url, shorterLink })
 
   } else {

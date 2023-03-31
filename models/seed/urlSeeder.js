@@ -22,6 +22,6 @@ db.once('open', async () => {
   }))
   
   // create seed
-  urlModel.create(seederData)
+  await urlModel.create(seederData)
   console.log('seed created!')
 })
