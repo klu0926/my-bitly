@@ -17,9 +17,12 @@
 ## Prerequisites - 環境建置與需求
 
 * Node.js
-* Express "^4.16.4"
+* dotenv "16.0.3"
+* Express "^4.18.3"
 * Express-handlebars "^3.1.0"
-
+* Mongoose "7.0"
+* node-fetch "^2.6"
+* valid-url "^1.0.9"
 ## Installation and execution - 安裝與執行步驟
 
 1.開啟Terminal, Clone此專案至本機:
@@ -53,3 +56,16 @@ server live on http://localhost:3000
 ```
 
 7.打開瀏覽器輸入http://localhost:3000 來使用本專案
+
+
+## NPM Scripts - 腳本
+* 建立 seed
+```
+npm run seed
+```
+
+* 刪除全部資料庫裡的 document
+```
+npm run deleteAllData
+```
+
