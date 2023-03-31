@@ -37,10 +37,12 @@ Router.post('/', async (req, res) => {
   const inputUrl = req.body.url
   const url = inputUrl.trim().toLowerCase()
   let errorMessage = ""
-  // req.headers.origin
-  let shorterLink = req.headers.origin + "/"
+
+  // get my current server URL
+  let shorterLink = `${req.protocol}://${req.hostname}:${process.env.PORT}`
 
   // check input
+  // 防止表單送出並提示使用者
   if (url === "") {
     errorMessage = "Please enter your url"
     return res.render('index', { errorMessage })
@@ -61,9 +63,9 @@ Router.post('/', async (req, res) => {
 
   // check data if already exist
   const exist = await dataExist('originalUrl', url)
-  // return shorter url
+
+  // 輸入相同網址時，產生一樣的縮址
   if (exist) {
-    // return data short link
     shorterLink += exist.shortUrl
     console.log('Return exist data short URL, All done')
     return res.render('index', { url, shorterLink })
