@@ -1,8 +1,7 @@
 // home
 const Router = require('express').Router()
 const validUrl = require('valid-url')
-
-
+const fetchCheck = require('../../config/fetchCheck')
 
 // GET
 Router.get('/', (req, res) => {
@@ -10,7 +9,7 @@ Router.get('/', (req, res) => {
 })
 
 // POST
-Router.post('/', (req, res) => {
+Router.post('/', async (req, res) => {
   const url = req.body.url
   let errorMessage = ""
 
@@ -20,15 +19,23 @@ Router.post('/', (req, res) => {
     return res.render('index', { errorMessage })
   }
 
-  // check valid url
+  // check if including HTTP string
   if (!(validUrl.isWebUri(url))) {
     errorMessage = 'Please enter a valid URL like : "http://www.google.com" '
     return res.render('index', { errorMessage })
   }
 
-  console.log(url)
+  // check with fetch
+  const response = await fetchCheck(url)
+  console.log('response: ', response)
+  if (response === false) {
+    errorMessage = `Fail to connect to your url, please check if url is working correctly`
+    return res.render('index', { errorMessage })
+  }
 
+  // check data if already exist
   res.render('index')
+  console.log('working!')
 })
 
 module.exports = Router
