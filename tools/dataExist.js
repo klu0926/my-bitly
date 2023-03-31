@@ -10,7 +10,7 @@ function dataExist(urlType, url) {
     .lean()
     .then(URL => {
       if (URL !== null) {
-        return true
+        return URL
       } else {
         return false
       }

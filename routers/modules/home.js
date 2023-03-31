@@ -4,6 +4,7 @@ const validUrl = require('valid-url')
 const fetchCheck = require('../../tools/fetchCheck')
 const urlModel = require('../../models/urlModel')
 const dataExist = require('../../tools/dataExist')
+const generateLink = require('../../tools/generateLink')
 
 // GET
 Router.get('/', (req, res) => {
@@ -15,6 +16,7 @@ Router.post('/', async (req, res) => {
   const inputUrl = req.body.url
   const url = inputUrl.trim().toLowerCase()
   let errorMessage = ""
+  let shorterLink = "http://localhost/"
 
   // check input
   if (url === "") {
@@ -41,19 +43,19 @@ Router.post('/', async (req, res) => {
   }
 
   // check data if already exist
-  console.log('trying to find:', url)
-  const exist = await dataExist(url)
+  const exist = await dataExist('originalUrl', url)
+  // return shorter url
   if (exist) {
-    console.log('url already in our data')
+    shorterLink += exist.shortUrl
+    return res.render('index', { url, shorterLink })
   } else {
-    console.log('url is not in our data')
+    shorterLink += await generateLink()
+    return res.render('index', { url, shorterLink })
   }
 
+  // create shorter url ///////////
 
-  // create shorter url
 
-  // return shorter url
-  res.render('index', { url, errorMessage })
 })
 
 module.exports = Router

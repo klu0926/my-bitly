@@ -3,15 +3,40 @@
   <div class="row d-flex justify-content-center">
     <div class="col-sm-12 col-md-10 col-lg-6 col-xl-6">
       <div class="mb-3">
+
+        {{#if shorterLink}}
+        <!-- url output -->
+        <h2 class="text-center">Success! please use this link:</h2>
+        <h3 id="short-url" class="text-primary text-center">
+          {{shorterLink}}
+        </h3>
+        <div class="d-flex justify-content-center mt-3">
+          <!-- copy button -->
+          <button type="button" id="copy-button" class="btn btn-success position-relative w-100 px-5">Copy
+            <p id="copy-span" class="text-danger mt-1 fw-bold d-none"
+              style="position: absolute; top:100%; left:50%;transform: translate(-50%, 0%) ">
+              copied
+            </p>
+          </button>
+        </div>
+        {{else}}
+        <!-- url input -->
         <input class="form-control" type="text" name="url" id="url" {{#if url}}value="{{url}}" {{/if}}
           placeholder="http://www.google.com">
         {{#if errorMessage}}
         <span class="text-danger mt-0 mb-0">{{errorMessage}}</span>
         {{/if}}
+        <!-- shorten button -->
+        <div class="d-flex justify-content-center mt-3">
+          <button type="submit" class="btn btn-primary position-relative px-5 w-100">
+            Shorten
+          </button>
+        </div>
+        {{/if}}
+
+
       </div>
-      <div class="d-flex justify-content-center">
-        <button class="btn btn-primary px-5">Shorten</button>
-      </div>
+
     </div>
   </div>
 </form>
