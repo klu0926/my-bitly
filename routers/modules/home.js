@@ -39,7 +39,8 @@ Router.post('/', async (req, res) => {
   let errorMessage = ''
 
   // get my current server URL
-  let shorterLink = `${req.protocol}://${req.hostname}:${process.env.PORT}`
+  let shorterLink = req.headers.origin + "/"
+  console.log('shorterLink', shorterLink)
 
   // check input
   // 防止表單送出並提示使用者
